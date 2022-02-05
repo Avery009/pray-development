@@ -68,7 +68,7 @@ def prayerrequestedit(request,prayer_id):
 			'prayer' : prayer,
 		}
 		template = loader.get_template('editrequestform.html')
-		print(prayer)
+		print(prayer.prayer_description)
 		return HttpResponse(template.render(context,request))
 	elif request.method == 'POST':
 		#prayer_request_date = request.POST['prayer_request_date']

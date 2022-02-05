@@ -10,12 +10,15 @@
 {% if prayer %}
 
 <form action="/request/new/" method="post" class="form">
+  <div class="mb-3"><label class="form-label" for="id_prayer_request_date">Prayer request date</label><input type="text" name="prayer_request_date" class="form-control" placeholder="Prayer Request Date" title="" required id="id_prayer_request_date"></div>
   <div class="mb-3">
 	<label class="form-label" for="id_prayer_answer_date">Prayer answer date</label>
 	<input type="text" name="prayer_answer_date" class="form-control" {% if prayer.prayer_answer_date %}value="{{prayer.prayer_answer_date}}"{% elif prayer.prayer_answer_date is None %}placeholder="Prayer Answer Date" {% endif %} title="" id="id_prayer_answer_date">
   </div>
-<div class="mb-3"><label class="form-label" for="id_prayer_description">Prayer description</label><textarea name="prayer_description" cols="40" rows="10" maxlength="1000" class="form-control" placeholder="Prayer description" title="" required id="id_prayer_description">
-</textarea></div>
+  <div class="mb-3">
+	<label class="form-label" for="id_prayer_description">Prayer description</label>
+	<textarea name="prayer_description" cols="40" rows="10" maxlength="1000" class="form-control" {% if prayer.prayer_description is None %}placeholder="Prayer Description" {% endif %} title="" required id="id_prayer_description">{% if prayer.prayer_description %}{{prayer.prayer_description}}{% endif %}</textarea>
+  </div>
 <div class="mb-3"><label class="form-label" for="id_prayer_recipients">Prayer recipients</label><input type="text" name="prayer_recipients" maxlength="100" class="form-control" placeholder="Prayer recipients" title="" id="id_prayer_recipients"></div>
 <div class="mb-3"><label class="form-label" for="id_prayer_recipients_email">Prayer recipients email</label><input type="text" name="prayer_recipients_email" maxlength="100" class="form-control" placeholder="Prayer recipients email" title="" id="id_prayer_recipients_email"></div>
 <div class="mb-3"><div class="form-check"><input type="checkbox" name="prayer_answered" class="form-check-input" id="id_prayer_answered"><label class="form-check-label" for="id_prayer_answered">Prayer answered</label></div></div>

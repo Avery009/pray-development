@@ -1,0 +1,12 @@
+1) Change Prayer Recipients to Recipient
+	-Eventually add dynamic ability to add in additional recipients as well as recipient email addresses
+2) Setting initial values of prayer request date in New and Edit should not be editable and default to the current day for New 
+	-Changing status of prayer to answered will populate prayer answered date so it shouldn't have to be editted
+3) Passing field values between views by editting templates
+4) Deleting a prayer request manually with a confirmation
+5) Prayer categories
+6) Eventual image upload functionality
+7) Scope list queries for specific lists
+	-Potential drop-down portion to select one list at a time on the prayer board
+8) Searching functionality on the prayer board
+	-should be as simple as an object query that starts with a character set
