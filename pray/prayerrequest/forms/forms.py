@@ -27,8 +27,8 @@ class PrayerRequestForm(forms.ModelForm):
 	#prayer_categories = forms.MultipleChoiceField(required=True,widget=forms.CheckboxSelectMultiple,choices=prayerCategories)
 	prayer_answered = forms.BooleanField(required=False)
 	prayer_updates = forms.CharField(max_length = 1400,required=False,widget=forms.Textarea)
-	prayer_image = forms.ImageField(required=False)
-	prayer_answered_image = forms.ImageField(required=False)
+	#prayer_image = forms.ImageField(required=False)
+	#prayer_answered_image = forms.ImageField(required=False)
 	prayer_count = forms.IntegerField(widget=forms.NumberInput)
 
 class PrayerRequestEditForm(forms.Form):
@@ -53,5 +53,5 @@ class PrayerRequestEditForm(forms.Form):
 	#prayer_categories = forms.MultipleChoiceField(required=True,widget=forms.CheckboxSelectMultiple,choices=prayerCategories)
 	prayer_answered = forms.BooleanField(required=False)
 	prayer_updates = forms.CharField(max_length = 1400,required=False,widget=forms.Textarea)
-	prayer_image = forms.ImageField(required=False)
+	#prayer_image = forms.ImageField(required=False)
 	prayer_count = forms.IntegerField(widget=forms.NumberInput)
