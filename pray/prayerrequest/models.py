@@ -16,8 +16,8 @@ class Prayer(models.Model):
         ]
 	prayerCategoriesDefault = [('thanks'),('Thanksgiving')]
 	prayer_id = models.BigAutoField(primary_key=True,unique=True)
-	prayer_request_date = models.DateTimeField('prayer request date',auto_now=True)
-	prayer_answer_date = models.DateTimeField('prayer answer date',blank=True,null=True)
+	prayer_request_date = models.DateField('prayer request date')
+	prayer_answer_date = models.DateField('prayer answer date',blank=True,null=True)
 	prayer_description = models.CharField(max_length=1000)
 	prayer_recipients = models.CharField(max_length=100,blank=True,null=True)
 	prayer_recipients_email = models.EmailField(max_length=100,blank=True,null=True)

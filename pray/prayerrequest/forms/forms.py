@@ -19,8 +19,8 @@ class PrayerRequestForm(forms.ModelForm):
 	]
 	template_name = 'prayerrequestform.html'
 	prayer_id = forms.CharField(label = 'ID', max_length = 100)
-	prayer_request_date = forms.DateTimeField(required=True)
-	prayer_answer_date = forms.DateTimeField(required=False)
+	prayer_request_date = forms.DateField(required=True,widget=forms.SelectDateWidget)
+	prayer_answer_date = forms.DateField(required=False,widget=forms.SelectDateWidget)
 	prayer_description = forms.CharField(max_length = 1000, required = True, widget=forms.Textarea)
 	prayer_recipients = forms.CharField(max_length = 100, required = False)
 	prayer_recipients_email = forms.CharField(max_length = 100, required = False)
@@ -45,8 +45,8 @@ class PrayerRequestEditForm(forms.Form):
         ]
 	template_name = 'prayerrequestform.html'
 	prayer_id = forms.CharField(label = 'ID', max_length = 100, disabled=True)
-	prayer_request_date = forms.DateTimeField(required=True, disabled=True)
-	prayer_answer_date = forms.DateTimeField(required=False)
+	prayer_request_date = forms.DateField(required=True, disabled=True,widget=forms.SelectDateWidget)
+	prayer_answer_date = forms.DateField(required=False,widget=forms.SelectDateWidget)
 	prayer_description = forms.CharField(max_length = 1000, required = True, widget=forms.Textarea)
 	prayer_recipients = forms.CharField(max_length = 100, required = False)
 	prayer_recipients_email = forms.CharField(max_length = 100, required = False)

@@ -61,8 +61,15 @@ def prayerrequestinput(request):
 
 def prayerrequestedit(request,prayer_id):
 	if request.method == 'GET':
+		prayer = Prayer.objects.get(prayer_id=prayer_id)
 		form = forms.PrayerRequestEditForm()
-		return render(request, 'prayerrequestform.html',{'form': form})
+		context = {
+			'form' : form,
+			'prayer' : prayer,
+		}
+		template = loader.get_template('editrequestform.html')
+		print(prayer)
+		return HttpResponse(template.render(context,request))
 	elif request.method == 'POST':
 		#prayer_request_date = request.POST['prayer_request_date']
 		#prayer_answer_date = request.POST['prayer_answer_date']
@@ -78,16 +85,16 @@ def prayerrequestedit(request,prayer_id):
 		form = forms.PrayerRequestEditForm(request.POST)
 		if form.is_valid():
 			#prayer = form.save(commit=False)
-			prayer_request_date = form.cleaned_data.get('prayer_request_date')
-			prayer_answer_date = form.cleaned_data.get('prayer_answer_date')
-			prayer_description = form.cleaned_data.get('prayer_description')
-			prayer_recipients = form.cleaned_data.get('prayer_recipients')
-			prayer_recipients_email = form.cleaned_data.get('prayer_recipients_email')
-			prayer_categories = form.cleaned_data.get('prayer_categories')
-			prayer_answered = form.cleaned_data.get('prayer_answered')
-			prayer_updates = form.cleaned_data.get('prayer_updates')
-			prayer_image = form.cleaned_data.get('prayer_image')
-			prayer_answered_image = form.cleaned_data.get('prayer_answered_image')
+			#prayer_request_date = form.cleaned_data.get('prayer_request_date')
+			#prayer_answer_date = form.cleaned_data.get('prayer_answer_date')
+			#prayer_description = form.cleaned_data.get('prayer_description')
+			#prayer_recipients = form.cleaned_data.get('prayer_recipients')
+			#prayer_recipients_email = form.cleaned_data.get('prayer_recipients_email')
+			#prayer_categories = form.cleaned_data.get('prayer_categories')
+			#prayer_answered = form.cleaned_data.get('prayer_answered')
+			#prayer_updates = form.cleaned_data.get('prayer_updates')
+			#prayer_image = form.cleaned_data.get('prayer_image')
+			#prayer_answered_image = form.cleaned_data.get('prayer_answered_image')
 			form.save()
 			return redirect('/requests/success')
 		else:

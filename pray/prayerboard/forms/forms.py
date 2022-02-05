@@ -9,8 +9,8 @@ class PrayerRequestViewForm(forms.ModelForm):
 		model = Prayer
 		exclude = ('prayer_id','prayer_recipients','prayer_recipients_email','prayer_categories')
 	prayer_id = forms.CharField(label = 'ID', max_length = 100)
-	prayer_request_date = forms.DateTimeField(required=True,disabled=True)
-	prayer_answer_date = forms.DateTimeField(required=False,disabled=True)
+	prayer_request_date = forms.DateField(required=True,disabled=True,widget=forms.SelectDateWidget)
+	prayer_answer_date = forms.DateField(required=False,disabled=True,widget=forms.SelectDateWidget)
 	prayer_description = forms.CharField(max_length = 1000, required = True, widget=forms.Textarea,disabled=True)
 	prayer_recipients = forms.CharField(max_length = 100, required = False)
 	prayer_recipients_email = forms.CharField(max_length = 100, required = False)
