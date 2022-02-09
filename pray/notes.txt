@@ -1,3 +1,4 @@
+0) Prayer increment upon button click
 1) Change Prayer Recipients to Recipient
 	-Eventually add dynamic ability to add in additional recipients as well as recipient email addresses
 2) Setting initial values of prayer request date in New and Edit should not be editable and default to the current day for New 
