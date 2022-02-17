@@ -8,8 +8,8 @@ from django.template import loader
 
 def viewprayerrequests(request):
 	#Load completed and current as separate lists
-	user_current_prayer_list = Prayer.objects.all()
-	user_answered_prayer_list = Prayer.objects.all()
+	user_current_prayer_list = Prayer.objects.all().order_by('prayer_request_date')
+	user_answered_prayer_list = Prayer.objects.all().order_by('-prayer_request_date')
 	template = loader.get_template('viewprayerrequests.html')
 	print(user_current_prayer_list)
 	context = {
@@ -51,7 +51,7 @@ def prayerrequestinput(request):
 			#prayer.prayer_image = request.prayer_image
 			#prayer.prayer_answered_image = request.prayer_answered_image
 			form.save()
-			return redirect('/requests/success')
+			return redirect('/success')
 		else:
 			context = {
 				'error' : 501
@@ -96,7 +96,7 @@ def prayerrequestedit(request,prayer_id):
 			#prayer_image = form.cleaned_data.get('prayer_image')
 			#prayer_answered_image = form.cleaned_data.get('prayer_answered_image')
 			form.save()
-			return redirect('/requests/success')
+			return redirect('/success')
 		else:
 			context = {
 				'error' : 501
@@ -104,8 +104,9 @@ def prayerrequestedit(request,prayer_id):
 			template = loader.get_template('error.html')
 			return HttpResponse(template.render(context,request))
 def success(request):
-	template = loader.get_template('success.html')
-	context = {
+	#template = loader.get_template('success.html')
+	#context = {
 		#Add in username and prayer_id to validate successful DB entry
-	}		
-	return HttpResponse(template.render(context,request))
+	#}		
+	#return HttpResponse(template.render(context,request))
+	viewprayerrequests(request)

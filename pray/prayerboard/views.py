@@ -61,7 +61,5 @@ def individual(request,prayer_id):
 		template = loader.get_template('error.html')
 		return HttpResponse(template.render(context,request))
 		
-def praysuccess(request):
-	template = loader.get_template('praysuccess.html')
-	context = {}
-	return HttpResponse(template.render(context,request))		
+def success(request):
+	latest(request)
