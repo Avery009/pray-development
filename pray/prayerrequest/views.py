@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404
 from .models import Prayer
 from .forms import forms
 from django.template import loader
+from django.forms import formset_factory,modelformset_factory
 
 # Create your views here.
 
@@ -62,9 +63,19 @@ def prayerrequestinput(request):
 def prayerrequestedit(request,prayer_id):
 	if request.method == 'GET':
 		prayer = Prayer.objects.get(prayer_id=prayer_id)
-		form = forms.PrayerRequestEditForm()
+		#form = forms.PrayerRequestEditForm()
+		#PrayerFormSet = formset_factory(Prayer.objects.get(prayer_id=prayer_id),fields=('prayer_description','prayer_recipients','prayer_recipients_email','prayer_updates'))
+		PrayerFormSet = formset_factory(forms.PrayerRequestEditForm)	
+		formset = PrayerFormSet(initial=[
+			{
+				'prayer_description':prayer.prayer_description,
+				'prayer_recipients':prayer.prayer_recipients,
+				'prayer_recipients_email':prayer.prayer_recipients_email,
+				'prayer_updates':prayer.prayer_updates
+			}	
+		])
 		context = {
-			'form' : form,
+			'form' : formset,
 			'prayer' : prayer,
 		}
 		template = loader.get_template('editrequestform.html')
@@ -82,8 +93,19 @@ def prayerrequestedit(request,prayer_id):
 		#prayer_image = request.POST['prayer_image']
 		#prayer_answered_image = request.POST['prayer_answered_image']
 		#validate each field in some way to account for SQL injection, etc.
-		form = forms.PrayerRequestEditForm(request.POST)
-		if form.is_valid():
+		#form = forms.PrayerRequestEditForm(request.POST)
+		prayer = Prayer.objects.get(prayer_id=prayer_id)
+		PrayerFormSet = formset_factory(Prayer,fields=('prayer_description','prayer_recipients','prayer_recipients_email','prayer_updates','prayer_id'),absolute_max=2,max_num=2,min_num=0)
+		prayerFilter = Prayer.objects.filter(prayer_id=prayer.prayer_id)
+		data = {
+			'form-TOTAL-FORMS':'2',
+			'form-INITIAL-FORMS':'0',
+			'queryset':prayerFilter,
+		}
+		#PrayerFormSet = formset_factory(forms.PrayerRequestEditForm)
+		formset = PrayerFormSet(request.POST,request.FILES,data)
+		print(str(formset))
+		if formset.is_valid():
 			#prayer = form.save(commit=False)
 			#prayer_request_date = form.cleaned_data.get('prayer_request_date')
 			#prayer_answer_date = form.cleaned_data.get('prayer_answer_date')
@@ -95,11 +117,12 @@ def prayerrequestedit(request,prayer_id):
 			#prayer_updates = form.cleaned_data.get('prayer_updates')
 			#prayer_image = form.cleaned_data.get('prayer_image')
 			#prayer_answered_image = form.cleaned_data.get('prayer_answered_image')
-			form.save()
+			formset.save()
 			return redirect('/success')
 		else:
 			context = {
-				'error' : 501
+				'error' : 501,
+				'formset' : formset
 			}
 			template = loader.get_template('error.html')
 			return HttpResponse(template.render(context,request))

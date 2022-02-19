@@ -8,44 +8,49 @@
 {% bootstrap_messages %}
 
 {% if prayer %}
-
 <form action="/request/edit/{{prayer.prayer_id}}" method="post" class="form">
-  <div class="mb-3"><label class="form-label" for="id_prayer_request_date">Prayer request date</label><input type="text" name="prayer_request_date" class="form-control" placeholder="Prayer Request Date" title="" value = "{{prayer.prayer_request_date}}" required id="id_prayer_request_date"></div>
+  {% csrf_token %}
+<!--
+   <div class="mb-3">
+	<label class="form-label" for="id_prayer_request_date">Prayer request date</label>
+	<input type="text" name="prayer_request_date" class="form-control" placeholder="Prayer Request Date" title="" value = "{{prayer.prayer_request_date}}" required id="id_prayer_request_date">
+  </div>
+
   <div class="mb-3">
 	<label class="form-label" for="id_prayer_answer_date">Prayer answer date</label>
 	<input type="text" name="prayer_answer_date" class="form-control" {% if prayer.prayer_answer_date %}value="{{prayer.prayer_answer_date}}"{% elif prayer.prayer_answer_date is None %}placeholder="Prayer Answer Date" {% endif %} title="" id="id_prayer_answer_date">
   </div>
+-->
   <div class="mb-3">
 	<label class="form-label" for="id_prayer_description">Prayer description</label>
 	<textarea name="prayer_description" cols="40" rows="10" maxlength="1000" class="form-control" {% if prayer.prayer_description is None %}placeholder="Prayer Description" {% endif %} title="" required id="id_prayer_description">{% if prayer.prayer_description %}{{prayer.prayer_description}}{% endif %}</textarea>
   </div>
   <div class="mb-3">
 	<label class="form-label" for="id_prayer_recipients">Prayer Recipients</label>
-	<input type="text" name="prayer_recipients" maxlength="100" class="form-control" placeholder="Prayer recipients" title="" id="id_prayer_recipients">
+	<input type="text" name="prayer_recipients" maxlength="100" class="form-control" {% if prayer.prayer_recipients %}value="{{prayer.prayer_recipients}}"{% elif prayer.prayer_recipients is None %}placeholder="Prayer Recipients" {% endif %} title="" id="id_prayer_recipients">
   </div>
-  <div class="mb-3"><label class="form-label" for="id_prayer_recipients_email">Prayer recipients email</label>
-	<input type="text" name="prayer_recipients_email" maxlength="100" class="form-control" placeholder="Prayer recipients email" title="" id="id_prayer_recipients_email">
+  <div class="mb-3">
+	<label class="form-label" for="id_prayer_recipients_email">Prayer recipients email</label>
+	<input type="text" name="prayer_recipients_email" maxlength="100" class="form-control" {% if prayer.prayer_recipients_email %}value="{{prayer.prayer_recipients_email}}"{% elif prayer.prayer_recipients_email is None %}placeholder="Prayer Recipients Email" {% endif %} title="" id="id_prayer_recipients_email">
   </div>
-  <div class="mb-3"><div class="form-check">
+<!--
+  <div class="mb-3">
+	<div class="form-check">
 	<input type="checkbox" name="prayer_answered" class="form-check-input" id="id_prayer_answered">
 	<label class="form-check-label" for="id_prayer_answered">Prayer answered</label>
+  	</div>
   </div>
+-->
   <div class="mb-3">
-	<label class="form-label" for="id_prayer_updates">Prayer updates</label><
-	textarea name="prayer_updates" cols="40" rows="10" maxlength="1400" class="form-control" placeholder="Prayer updates" title="" id="id_prayer_updates"></textarea>
+	<label class="form-label" for="id_prayer_updates">Prayer Updates</label>
+	<textarea name="prayer_updates" cols="40" rows="10" maxlength="1400" class="form-control" placeholder="Prayer updates" title="" id="id_prayer_updates"></textarea>
   </div>
+<!--
   <div class="mb-3">
-	<label class="form-label" for="id_prayer_id">ID</label>
-	<input type="text" name="prayer_id" maxlength="100" class="form-control" placeholder="ID" title="" required id="id_prayer_id">
+	<label class="form-label" for="id_prayer_count">Prayer Count</label>
+	<input type="number" name="prayer_count" class="form-control" {% if prayer.prayer_count %}value="{{prayer.prayer_count}}"{% elif prayer.prayer_count is None %}placeholder="Prayer Count" {% endif %} title="" id="id_prayer_count">
   </div>
-  <div class="mb-3">
-	<label class="form-label" for="id_prayer_request_date">Prayer request date</label>
-	<input type="text" name="prayer_request_date" class="form-control" placeholder="Prayer request date" title="" required id="id_prayer_request_date">
-  </div>
-  <div class="mb-3">
-	<label class="form-label" for="id_prayer_count">Prayer count</label>
-	<input type="number" name="prayer_count" class="form-control" placeholder="Prayer count" title="" required id="id_prayer_count">
-  </div>
+-->
   <div class="mb-3">
     <button type="submit" class="btn btn-primary">
       Submit
