@@ -94,15 +94,14 @@ def prayerrequestedit(request,prayer_id):
 		#prayer_answered_image = request.POST['prayer_answered_image']
 		#validate each field in some way to account for SQL injection, etc.
 		#form = forms.PrayerRequestEditForm(request.POST)
-		prayer = Prayer.objects.get(prayer_id=prayer_id)
+		#prayer = Prayer.objects.get(prayer_id=prayer_id)
 		PrayerFormSet = formset_factory(Prayer,fields=('prayer_description','prayer_recipients','prayer_recipients_email','prayer_updates','prayer_id'),absolute_max=2,max_num=2,min_num=0)
-		prayerFilter = Prayer.objects.filter(prayer_id=prayer.prayer_id)
+		prayerFilter = Prayer.objects.filter(prayer_id=prayer_id)
 		data = {
 			'form-TOTAL-FORMS':'2',
 			'form-INITIAL-FORMS':'0',
 			'queryset':prayerFilter,
 		}
-		#PrayerFormSet = formset_factory(forms.PrayerRequestEditForm)
 		formset = PrayerFormSet(request.POST,request.FILES,data)
 		print(str(formset))
 		if formset.is_valid():

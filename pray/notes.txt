@@ -12,3 +12,5 @@
 	-Potential drop-down portion to select one list at a time on the prayer board
 8) Searching functionality on the prayer board
 	-should be as simple as an object query that starts with a character set
+9) Pray button on prayer board populates a new view with the prayer title, prayer description, and pray button to increment pray count and provide a prayer update
+

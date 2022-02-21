@@ -5,7 +5,8 @@ from ..models import Prayer
 class PrayerRequestForm(forms.ModelForm):
 	class Meta:
 		model = Prayer
-		fields = '__all__'
+		#fields = '__all__'
+		exclude = ('prayer_id',)
 	prayerCategories = [
 		('thanks','Thanksgiving'),
 		('healing','Healing'),
@@ -29,7 +30,7 @@ class PrayerRequestForm(forms.ModelForm):
 	prayer_updates = forms.CharField(max_length = 1400,required=False,widget=forms.Textarea)
 	#prayer_image = forms.ImageField(required=False)
 	#prayer_answered_image = forms.ImageField(required=False)
-	prayer_count = forms.IntegerField(widget=forms.NumberInput)
+	prayer_count = forms.IntegerField(disabled=True,widget=forms.NumberInput,initial=1)
 
 class PrayerRequestEditForm(forms.Form):
 	prayerCategories = [
@@ -44,8 +45,8 @@ class PrayerRequestEditForm(forms.Form):
                 ('forgiveness','Forgiveness'),
         ]
 	template_name = 'prayerrequestform.html'
-	prayer_id = forms.CharField(label = 'ID', max_length = 100, disabled=True)
-	prayer_request_date = forms.DateField(required=True, disabled=True,widget=forms.SelectDateWidget)
+	#prayer_id = forms.CharField(label = 'ID', max_length = 100, disabled=True)
+	#prayer_request_date = forms.DateField(required=True, disabled=True,widget=forms.SelectDateWidget)
 	prayer_answer_date = forms.DateField(required=False,widget=forms.SelectDateWidget)
 	prayer_description = forms.CharField(max_length = 1000, required = True, widget=forms.Textarea)
 	prayer_recipients = forms.CharField(max_length = 100, required = False)
@@ -54,4 +55,4 @@ class PrayerRequestEditForm(forms.Form):
 	prayer_answered = forms.BooleanField(required=False)
 	prayer_updates = forms.CharField(max_length = 1400,required=False,widget=forms.Textarea)
 	#prayer_image = forms.ImageField(required=False)
-	prayer_count = forms.IntegerField(widget=forms.NumberInput)
+	#prayer_count = forms.IntegerField(widget=forms.NumberInput)
