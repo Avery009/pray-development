@@ -41,6 +41,6 @@ class PrayerForm(ModelForm):
 		fields = '__all__'
 
 class PrayerUpdatesForm(ModelForm):
-        class Meta:
-                model = PrayerUpdates
-                fields = ['prayer_id','prayer_title','prayer_description','prayer_count','prayer_updates','prayer_updates_user']
+	class Meta:
+		model = PrayerUpdates
+		fields = '__all__'
