@@ -1,5 +1,4 @@
 from django import forms
-from django.core.files.uploadedfile import SimpleUploadedFile
 from ..models import Prayer
 
 
@@ -20,3 +19,4 @@ class PrayerRequestViewForm(forms.ModelForm):
 	#prayer_image = forms.ImageField(required=False,disabled=True)
 	#prayer_answered_image = forms.ImageField(required=False,disabled=True)
 	prayer_count = forms.IntegerField(disabled=True,widget=forms.NumberInput)
+
