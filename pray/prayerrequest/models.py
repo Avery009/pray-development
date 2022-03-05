@@ -31,16 +31,3 @@ class Prayer(models.Model):
 	prayer_count = models.IntegerField(null=False)
 	def __str__(self):
 		return self.prayer_id
-
-class PrayerUpdates(models.Model):
-	prayers = models.ManyToManyField(Prayer)
-
-class PrayerForm(ModelForm):
-	class Meta:
-		model = Prayer
-		fields = '__all__'
-
-class PrayerUpdatesForm(ModelForm):
-	class Meta:
-		model = PrayerUpdates
-		fields = '__all__'
